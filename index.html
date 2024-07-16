@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Add some basic styling to make it look better */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        #div {
+            width: 300px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            font-weight: bolder;
+        }
+        
+        input[type="text"], input[type="password"] {
+            width: 90%;
+            height: 30px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+       #btn {
+            height: 40px;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            
+            width: 90%;
+            
+        }
+        
+        #btn:hover {
+            background-color: #3e8e41;
+        }
+        
+        #msg {
+            font-size: 18px;
+            font-weight: bolder;
+            margin-top: 20px;
+            color: crimson;
+        }
+        
+        #logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #337ab7;
+        }
+        
+        a {
+            text-decoration: none;
+            color: rgb(41, 145, 197);
+            
+            font-size: 20px;
+
+        }
+        
+        a:hover {
+            cursor: pointer;
+        }
+        h2{
+            margin-left: 70px;
+            color: #3e8e41;
+        }
+        p{
+            margin-left:44%;
+            color:black;
+            margin-top: -20px;
+        }
+    </style>
+
+        
+</head>
+<body>
+    <div id="div">
+        <h2>Log In Form </h2>
+        <form id="form">
+    Email: <input type="text" id="email" placeholder="Enter User Email"> <br><br>
+    Password: <input type="password" id="password" placeholder="Enter password"> <br><br>
+
+    <button id="btn">Log in</button><br><br>
+</form>
+</div>
+    <p> Don't Have a Account? <a href="http://127.0.0.1:5500/index2.html">Click Here</a></p>
+
+    
+    <p id="msg"></p>
+    
+    <span id="logo"></span>
+</body>
+<script>
+    let form=document.getElementById("form")
+    let btn=document.getElementById("btn");
+    let msg=document.getElementById("msg");
+    let logo=document.getElementById("logo");
+   
+    let arr = JSON.parse(localStorage.getItem("user")) || [];
+    function loginUser(){
+        let userdetails={
+            email:document.getElementById("email").value,
+            password:document.getElementById("password").value
+        }
+        let value = arr.find((user)=>
+        user.email==userdetails.email && user.password==userdetails.password
+    );
+    form.reset()
+    if(value){
+    
+    } else{
+        msg.innerHTML="Details not Found";
+        msg.style.color="red"
+    }
+    }
+    btn.addEventListener("click",(e) =>{
+        loginUser();
+        e.preventDefault()
+    });
+</script>
+<br><br>
+
+
+</html>
