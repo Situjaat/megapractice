@@ -97,11 +97,7 @@
 </form>
 </div>
     <p> Don't Have a Account? <a href="index2.html">Click Here</a></p>
-
     
-    <p id="msg"></p>
-    
-    <span id="logo"></span>
 </body>
 <script>
     let form=document.getElementById("form")
@@ -118,13 +114,13 @@
         let value = arr.find((user)=>
         user.email==userdetails.email && user.password==userdetails.password
     );
+    localStorage.setItem("login_user",JSON.stringify(userdetails))
     form.reset()
     if(value){
     alert("login successfully")
     window.location.href="homepage.html"
    } else{
-        msg.innerHTML="Details not Found";
-        msg.style.color="red"
+      alert("invalid credentials")
     }
     }
     btn.addEventListener("click",(e) =>{

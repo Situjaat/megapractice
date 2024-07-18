@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
     <style>
         .body{
             padding: 0px;
@@ -18,7 +19,7 @@
             font-style: italic;
         }
         nav{
-            width: 99%;
+            width: 100%;
             margin: 0px auto;
             background-color: rgb(128, 128, 215);
             padding: 10px;
@@ -41,64 +42,6 @@
             color: white;
         }
 
-        #hero{
-            margin: auto;
-            width: 100%;
-        }
-        #hero img{
-            width: 100%;
-            margin: auto;
-            border-radius: 5px;
-        }
-        #product{
-            
-            width: 100%;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            margin-top: 10px;
-        }
-        #product1{
-            border: 1px solid black;
-            width: 90%;
-            margin: auto;
-            text-align: center;
-            /* padding: 10px; */
-            border-radius: 5px;
-            background-color: azure;
-
-        }
-        #product1 img{
-            width: 100%;
-            border-radius: 5px;
-           
-
-        }
-        h3{
-            font-weight: bolder;
-            color: rgb(46, 186, 204);
-            font-size: 30px;
-        }
-        #buy{
-            background-color: rgb(73, 196, 73);
-            border-radius: 5px;
-            margin-bottom: 10px;
-            
-        }
-        #buy:hover{
-            background-color: rgb(46, 186, 204);
-            cursor: pointer;
-        }
-
-        #cart{
-            background-color: rgb(204, 27, 27);
-            border-radius: 5px;
-            
-        }
-        #cart:hover{
-            background-color: rgb(184, 33, 159);
-            cursor: pointer;
-        }
         #contact{
             background-color: rgb(114, 129, 140);
             margin-top: 10px;
@@ -109,19 +52,25 @@
         #img img{
             width: 70%;
         }
-        /* Global Styles */
-
 * {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
+#hero{
+    width: 100%;
+
+}
+#hero img{
+    width: 100%;
+}
 
 #contact {
+    width: 90%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  max-width: 800px;
+  /* flex-wrap: wrap; */
+  justify-content: space-evenly;
+  /* align-items: center; */
+  /* max-width: 800px; */
   margin: 40px auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -130,7 +79,7 @@
 }
 
 #img {
-  width: 70%;
+  width: 50%;
   margin: 20px;
 }
 
@@ -141,13 +90,14 @@
   border-radius: 10px;
 }
 
+
 #contact_form {
-  width: 60%;
+  width: 100%;
   margin: 20px;
 }
 
 h3 {
-  margin-top: 0;
+  margin-top: 20px;
   color: #333;
   font-weight: bold;
   text-align: center;
@@ -168,11 +118,6 @@ input[type="text"], textarea {
   border-radius: 5px;
 }
 
-input[type="text"]:focus, textarea:focus {
-  border-color: #aaa;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 textarea {
   height: 100px;
   resize: vertical;
@@ -190,12 +135,7 @@ textarea {
 #submit:hover {
   background-color: #3e8e41;
 }
-/* #footer{
-    display: flex;
-    justify-content: space-evenly;
-} */
 
-/* Footer styles */
 #footer {
   background-color: #333;
   color: #fff;
@@ -227,7 +167,6 @@ textarea {
   margin-right: 10px;
 }
 
-/* Copyright styles */
 .copyright {
   background-color: #444;
   color: #fff;
@@ -250,21 +189,14 @@ textarea {
   #product {
     grid-template-columns: repeat(3, 1fr);
   }
-  #product1 {
-    width: 80%;
-  }
+ 
 }
 
 @media (max-width: 768px) {
   nav ul {
     gap: 50px;
   }
-  #product {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  #product1 {
-    width: 70%;
-  }
+  
   #contact {
     flex-direction: column;
   }
@@ -283,12 +215,7 @@ textarea {
   nav ul {
     gap: 20px;
   }
-  #product {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  #product1 {
-    width: 90%;
-  }
+ 
   #contact {
     padding: 10px;
   }
@@ -304,9 +231,6 @@ textarea {
 @media (max-width: 480px) {
   nav ul {
     gap: 10px;
-  }
-  #product1 {
-    width: 100%;
   }
   #contact {
     padding: 5px;
@@ -331,12 +255,10 @@ textarea {
         
      </style> 
     
-
-
-    
-    
 </head>
 <body>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <div>
         <h2>Welcome to Rajasthan Hand made Site</h2>
     </div>
@@ -359,17 +281,17 @@ textarea {
 
     <script>
         let sitaram=document.getElementById("sitaram")
-        const loggedInEmail=localStorage.getItem("loggedInEmail") || [];
+        const loggedInEmail=localStorage.getItem("login_user") || [];
         let btn=document.getElementById("userlog");
         btn.style.display="none"
         if(loggedInEmail){
           const users=JSON.parse(localStorage.getItem("users")) || [];
-            const user = users.find((user) => user.email===loggedInEmail);
+            const user = loggedInEmail.find((user) => user.email===loggedInEmail);
            if (user){
-            document.getElementById("useremail").innerHTML=user.email;
+            document.getElementById("useremail").innerHTML=users.name;
             btn.style.display="Logout"
             btn.style.display="block"
-            sitaram.innerText=users.name
+            sitaram.innerText=loggedInEmail.name
            }
 
         }else{
@@ -382,35 +304,46 @@ textarea {
     </script>
 
     <div id="hero">
-        <img src="./hero pic.jpg" alt="">
+         <img src="./hero pic.jpg" alt="">
     </div>
 
-    <div id="product">
-        <div id="product1">
-            <img src="https://res.cloudinary.com/simplotel/image/upload/x_0,y_197,w_1918,h_1079,r_0,c_crop,q_80,fl_progressive/w_825,f_auto,c_fit/neemrana-hotels/blue_pottery_in_Rajasthan" alt="">
-            <h3>Blue Pottery</h3>
-            <button id="buy"> Buy Now</button>
-            <button id="cart">Add Cart</button>
-        </div>
-        <div id="product1">
-            <img src="https://res.cloudinary.com/simplotel/image/upload/x_0,y_101,w_1920,h_1080,r_0,c_crop,q_80,fl_progressive/w_825,f_auto,c_fit/neemrana-hotels/jewellery_in_Rajasthan" alt="">
-            <h3>Jewellery</h3>
-            <button id="buy"> Buy Now</button>
-            <button id="cart">Add Cart</button>
-        </div>
-        <div id="product1">
-            <img src="https://res.cloudinary.com/simplotel/image/upload/w_5000,h_3378/x_0,y_0,w_5000,h_2809,r_0,c_crop,q_80,fl_progressive/w_825,f_auto,c_fit/neemrana-hotels/Carpets_-_Famous_Crafts_of_Rajasthan" alt="">
-            <h3>Carpets</h3>
-            <button id="buy"> Buy Now</button>
-            <button id="cart">Add Cart</button>
-        </div>
-        <div id="product1">
-            <img src="https://res.cloudinary.com/simplotel/image/upload/w_5000,h_2812/x_0,y_0,w_5000,h_2812,r_0,c_crop,q_80,fl_progressive/w_825,f_auto,c_fit/neemrana-hotels/Leatherwear_-_famous_crafts_in_Rajasthan" alt="">
-            <h3>Leatherwear</h3>
-            <button id="buy"> Buy Now</button>
-            <button id="cart">Add Cart</button>
-        </div>
-    </div>
+    <script>
+        let arr=[]
+        let cont=document.getElementById("container")
+        
+        async function getdatafromapi(){
+            try{
+            let res=await axios.get("https://fakestoreapi.com/products")
+            console.log(res.data)
+            arr=res.data 
+            console.log(arr)
+            }
+            catch (error){
+                console.log("error")
+
+            }
+
+        }
+getdatafromapi()
+
+ function displaydata (){
+    arr.map((element)=>{
+        let div=document.createElement("div")
+                let title=document.createElement("h2")
+                title.innerText=element.title
+                let price=document.createElement("h3")
+                price.innerText=element.description
+                let description=document.createElement("p")
+                description.innerText=element.category   
+                div.append(title,description,category)
+                container.append(div)
+        })
+    }
+    displaydata()
+
+
+    </script>
+ 
 
     <div id="contact">
         <div id="img">
@@ -444,7 +377,7 @@ textarea {
         </div>
         <div id="footer3">
             <h4>Our Contact</h4>
-            <li>phone: 01425-654789</li>
+            <li>Phone: 01425-654789</li>
             <li>Email: handmade@gmail.com</li>
             <li>Fax: 123456987</li>
         </div>
@@ -453,28 +386,6 @@ textarea {
           <p>&copy; 2023 Rajasthan Handmade Site. All rights reserved.</p>
         </div>
      
-    <!-- <script>
-        let sitaram=document.getElementById("sitaram")
-        const loggedInEmail=localStorage.getItem("loggedInEmail") || [];
-        let btn=document.getElementById("userlog");
-        btn.style.display="none"
-        if(loggedInEmail){
-          const users=JSON.parse(localStorage.getItem("users")) || [];
-            const user = users.find((user) => user.email===loggedInEmail);
-           if (user){
-            document.getElementById("useremail").innerHTML=user.email;
-            btn.style.display="Logout"
-            btn.style.display="block"
-            sitaram.innerText=users.name
-           }
-
-        }else{
-            window.location.href="index.html";
-        }
-        function removekeyfromlocalstorage(){
-            window.location.href="index.html"
-        }
-        btn.addEventListener("click",removekeyfromlocalstorage)
-    </script> -->
+    
 </body>
 </html>
